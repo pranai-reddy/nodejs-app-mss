@@ -1,0 +1,30 @@
+node{
+    
+    stage('checkOutCode'){
+        
+        git 'https://github.com/pranai-reddy/nodejs-app-mss.git'
+        
+    }// stage checkOutCode closing
+    
+    stage('Build'){
+        
+        sh "npm install"
+    }
+    
+    stage('ExecuteSonarQubeReport'){
+        
+        sh 'npm run sonar' //Configure SonarQube details in sonar-prject.js file in Github
+    }
+    
+    //stage('UploadIntoNexus'){
+        
+      //  sh 'npm publish'
+   // }
+    
+    stage('Runapplication'){
+        
+        sh 'node app.js &'
+    }
+    
+    
+}//Node closing
